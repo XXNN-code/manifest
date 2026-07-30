@@ -31,7 +31,7 @@
     "@types/node": "^22.20.1",
     "@vitest/coverage-v8": "^4.1.10",
     "jsdom": "^30.0.0",
-    "typescript": "^5.7.0",
+    "typescript": "^7.0.2",
     "vite": "^6.1.0",
     "vite-plugin-solid": "^2.11.13",
     "vitest": "^4.1.10"
