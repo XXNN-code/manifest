@@ -515,9 +515,8 @@ export function buildCustomEndpoint(
   baseUrl: string,
   apiKind: 'openai' | 'anthropic' = 'openai',
 ): ProviderEndpoint {
-  // Strip trailing /v1 (or /v1/) since both buildPath callbacks include /v1.
-  const normalized = normalizeProviderBaseUrl(baseUrl);
   if (apiKind === 'anthropic') {
+    const normalized = normalizeProviderBaseUrl(baseUrl);
     return {
       baseUrl: normalized,
       buildHeaders: anthropicHeaders,
@@ -526,10 +525,11 @@ export function buildCustomEndpoint(
       requiresSsrfRevalidation: true,
     };
   }
+  const normalized = baseUrl.replace(/\/+$/, '');
   return {
     baseUrl: normalized,
     buildHeaders: openaiHeaders,
-    buildPath: openaiPath,
+    buildPath: () => '/chat/completions',
     format: 'openai',
     ...openaiStreamUsage,
     requiresSsrfRevalidation: true,

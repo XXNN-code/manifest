@@ -1276,7 +1276,7 @@ describe("CustomProviderForm — API format selector", () => {
     const anthropicRadio = screen.getByRole("radio", { name: /Anthropic/ }) as HTMLInputElement;
     expect(openaiRadio.checked).toBe(true);
     expect(anthropicRadio.checked).toBe(false);
-    expect(screen.getByText("/v1/chat/completions")).toBeDefined();
+    expect(screen.getByText("/chat/completions")).toBeDefined();
     expect(screen.getByText("/v1/messages")).toBeDefined();
     expect(screen.getByText("Most providers use OpenAI format.")).toBeDefined();
   });

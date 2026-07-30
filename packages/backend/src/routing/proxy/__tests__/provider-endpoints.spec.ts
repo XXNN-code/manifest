@@ -8,10 +8,11 @@ import {
 import { buildProviderExtraHeaders, resolveSubscriptionEndpointKey } from '../provider-hooks';
 
 describe('buildCustomEndpoint', () => {
-  it('strips trailing /v1 from base URL to avoid double /v1', () => {
+  it('leaves base URL intact (including version prefix like /v1, /v4) and appends /chat/completions', () => {
     const endpoint = buildCustomEndpoint('https://api.groq.com/openai/v1');
 
-    expect(endpoint.baseUrl).toBe('https://api.groq.com/openai');
+    expect(endpoint.baseUrl).toBe('https://api.groq.com/openai/v1');
+    expect(endpoint.buildPath('llama-3.1-70b')).toBe('/chat/completions');
     expect(endpoint.format).toBe('openai');
   });
 
@@ -30,11 +31,11 @@ describe('buildCustomEndpoint', () => {
     });
   });
 
-  it('builds OpenAI-compatible /v1/chat/completions path', () => {
+  it('builds OpenAI-compatible /chat/completions path', () => {
     const endpoint = buildCustomEndpoint('http://localhost:8000');
     const path = endpoint.buildPath('llama-3.1-70b');
 
-    expect(path).toBe('/v1/chat/completions');
+    expect(path).toBe('/chat/completions');
   });
 
   it('requests exact streamed usage for OpenAI-compatible custom providers', () => {

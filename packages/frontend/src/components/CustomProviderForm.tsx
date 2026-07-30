@@ -283,7 +283,7 @@ const CustomProviderForm: Component<Props> = (props) => {
                 onChange={() => setApiKind('openai')}
               />
               <span class="provider-detail__format-option-title">OpenAI</span>
-              <span class="provider-detail__format-option-path">/v1/chat/completions</span>
+              <span class="provider-detail__format-option-path">/chat/completions</span>
             </label>
             <label
               class={`provider-detail__format-option${
